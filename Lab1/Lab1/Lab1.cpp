@@ -1,11 +1,14 @@
 ﻿// Lab1.cpp : Defines the entry point for the application.
 //
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "framework.h"
 #include "Lab1.h"
 #include "module1.h"
 #include "module2.h"
 #include "module3.h"
+#include <stdio.h>
 
 #define MAX_LOADSTRING 100
 
@@ -211,5 +214,24 @@ void DoWork1(HINSTANCE hInst, HWND hWnd) {
 }
 
 void DoWork2(HINSTANCE hInst, HWND hWnd) {
-    Func_MOD2(hInst, hWnd);
+    int retVal = -1; // -1 = start; 0 = cancel/close; 1 = ok; 2 = next; 3 = back
+    
+    while (true) {
+        if (retVal == -1) {
+            // Start
+            retVal = Func_MOD2(hInst, hWnd);
+        }
+        else if (retVal == 2) {
+            // Next
+            retVal = Func_MOD3(hInst, hWnd);
+        }
+        else if (retVal == 3) {
+            // Back
+            retVal = Func_MOD2(hInst, hWnd);
+        }
+        else if (retVal == 0 || retVal == 1) {
+            // Ok/Cancel/Close
+            break;
+        }
+    }
 }

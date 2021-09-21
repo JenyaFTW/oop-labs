@@ -1,12 +1,9 @@
 #include "framework.h"
 #include <stdio.h>
 #include "resource2.h"
-#include "module3.h"
 
 static HINSTANCE hInstance;
 static HWND hWindow;
-
-static INT_PTR CALLBACK FirstDialog(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 static INT_PTR CALLBACK FirstDialog(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -19,8 +16,8 @@ static INT_PTR CALLBACK FirstDialog(HWND hDlg, UINT message, WPARAM wParam, LPAR
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
         case IDNEXT:
-            EndDialog(hDlg, 1);
-            Func_MOD3(hInstance, hWindow);
+            EndDialog(hDlg, 2);
+            return (INT_PTR)TRUE;
         case IDCANCEL:
             EndDialog(hDlg, 0);
             return (INT_PTR)TRUE;
